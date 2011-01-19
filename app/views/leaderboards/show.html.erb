@@ -1,9 +1,12 @@
 <h1><%= @leaderboard.title %></h1>
 <% unless @leaderboard.users.empty? %>
+  <ul>
   <% @leaderboard.users.each do |user| %>
-    <%= user.login %>
+    <li><%= user.login %></li>
   <% end %>
+  </ul>
 <% else %>
   No users yet
 <% end %>
-<%= link_to "Add user", new_leaderboard_user_url(params[:id]) %>
+
+<%= link_to "Back", leaderboards_url %>

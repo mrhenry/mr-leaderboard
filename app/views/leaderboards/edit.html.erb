@@ -1,0 +1,19 @@
+<h1>Edit leaderboard</h1>
+
+<%= form_for @leaderboard do |f| %>
+  <div><%= f.error_messages %></div>
+  <div>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+  <div>
+    <ul>
+      <% User.all.each do |user| %>
+        <li><%= check_box_tag "leaderboard[user_ids][]", user.id, @leaderboard.users.include?(user) %> <%= f.label user.login %></li>
+      <% end %>
+    </ul>
+  </div>
+  <%= f.submit %>
+<% end %>
+
+<%= link_to "Cancel", leaderboards_url %>

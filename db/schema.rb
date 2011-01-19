@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110118194140) do
+ActiveRecord::Schema.define(:version => 20110119212245) do
 
   create_table "leaderboards", :force => true do |t|
     t.string   "title"
@@ -18,9 +18,11 @@ ActiveRecord::Schema.define(:version => 20110118194140) do
     t.datetime "updated_at"
   end
 
-  create_table "leaderboards_users", :id => false, :force => true do |t|
-    t.integer "leaderboard_id"
-    t.integer "user_id"
+  create_table "memberships", :force => true do |t|
+    t.integer  "leaderboard_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "user_sessions", :force => true do |t|
