@@ -7,11 +7,13 @@
     <%= f.text_field :title %>
   </div>
   <div>
-    <ul>
+    <!--<ul>
       <% User.all.each do |user| %>
         <li><%= check_box_tag "leaderboard[user_ids][]", user.id, @leaderboard.users.include?(user) %> <%= f.label user.login %></li>
       <% end %>
-    </ul>
+    </ul>-->
+    <%= select_tag "leaderboard[user_ids][]", options_from_collection_for_select(User.all, 'id', 'login', @leaderboard_user_ids), :multiple => true %>
+    
   </div>
   <%= f.submit %>
 <% end %>

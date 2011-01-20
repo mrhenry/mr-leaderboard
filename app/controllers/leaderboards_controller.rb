@@ -24,6 +24,7 @@ class LeaderboardsController < ApplicationController
   
   def edit
     @leaderboard = Leaderboard.find(params[:id])
+    @leaderboard_user_ids = @leaderboard.users.collect { |user| user.id.to_i }
   end
   
   def update
