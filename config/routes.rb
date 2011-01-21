@@ -3,7 +3,7 @@ MrLeaderboard::Application.routes.draw do
   resources :leaderboards do
     resources :users
     resources :games do
-      match '/users/new' => 'games#edit'
+      resources :scores
     end
   end
   resources :users

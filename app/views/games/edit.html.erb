@@ -1,17 +1,18 @@
-<h1>Add game user</h1>
+<h1>Game</h1>
 
-<%= form_for [@leaderboard, @game], :url => edit_leaderboard_game_path do |f| %>
-  <%= f.hidden_field :leaderboard_id, :value => @leaderboard.id %>
+
+<%# form_for [@leaderboard, @game], :url => edit_leaderboard_game_path do |f| %>
+  <%# f.hidden_field :leaderboard_id, :value => @leaderboard.id %>
   <div>
-    <%= f.error_messages %>
+    <%# f.error_messages %>
   </div>
   <div>
-    <%= f.label "Score" %>
-    <%= f.text_field :score %>
+    <%# f.label "Score" %>
+    <%# f.text_field :score %>
   </div>
   <div>
-    <%= f.label 'User' %>
-    <%= f.select :user_id, options_from_collection_for_select(@leaderboard.users, 'id', 'login') %>
+    <%# f.label 'User' %>
+    <%# f.select :user_id, options_from_collection_for_select(@leaderboard.users, 'id', 'login') %>
   </div>
-  <%= f.submit %>
-<% end %>
+  <%# f.submit %>
+<%# end %>

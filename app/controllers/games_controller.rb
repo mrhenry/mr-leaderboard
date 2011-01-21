@@ -1,5 +1,10 @@
 class GamesController < ApplicationController
   
+  def show
+    @leaderboard = Leaderboard.find(params[:leaderboard_id])
+    @game = Game.find(params[:id])
+  end
+  
   def new
     @leaderboard = Leaderboard.find(params[:leaderboard_id])
     @game = Game.new
@@ -10,7 +15,7 @@ class GamesController < ApplicationController
     @game = Game.new(params[:game])
     
     if @game.save
-      render :new
+      render :edit
     else
       render :new
     end
@@ -18,7 +23,7 @@ class GamesController < ApplicationController
   
   def edit
     @leaderboard = Leaderboard.find(params[:leaderboard_id])
-    @game = Game.find(params[:game_id])
+    @game = Game.find(params[:id])
   end
   
 end
