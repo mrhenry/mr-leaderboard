@@ -5,6 +5,9 @@
     <li><%= user.login %></li>
   <% end %>
   </ul>
+  
+  <%= link_to "Add game", new_leaderboard_game_url(params[:id]) %>
+  
 <% else %>
   No users yet
 <% end %>

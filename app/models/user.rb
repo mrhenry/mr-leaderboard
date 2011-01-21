@@ -4,5 +4,6 @@ class User < ActiveRecord::Base
   
   has_many :memberships
   has_many :leaderboards, :through => :memberships
+  has_many :games
   
 end

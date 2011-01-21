@@ -10,7 +10,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110119212245) do
+ActiveRecord::Schema.define(:version => 20110121071230) do
+
+  create_table "games", :force => true do |t|
+    t.integer  "leaderboard_id"
+    t.integer  "user_id"
+    t.integer  "score"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "leaderboards", :force => true do |t|
     t.string   "title"
