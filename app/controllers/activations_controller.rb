@@ -8,7 +8,7 @@ class ActivationsController < ApplicationController
     
     if @user.activate!
       flash[:notice] = "Your user has been activated!"
-      UserSession.create(@user, false)
+      UserSession.create(@user)
       @user.deliver_welcome!
       redirect_to leaderboards_url
     else

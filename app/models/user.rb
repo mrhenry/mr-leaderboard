@@ -28,7 +28,5 @@ private
   def set_user_level
     self.level = 0 if self.level.nil?
   end
-  
-  
-  
+
 end
