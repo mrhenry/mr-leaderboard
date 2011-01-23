@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110121091650) do
+ActiveRecord::Schema.define(:version => 20110123174649) do
 
   create_table "games", :force => true do |t|
     t.integer  "leaderboard_id"
@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(:version => 20110121091650) do
     t.string   "last_login_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "active",              :default => false, :null => false
   end
 
 end

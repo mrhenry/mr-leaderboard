@@ -1,5 +1,6 @@
 MrLeaderboard::Application.routes.draw do
   
+
   resources :leaderboards do
     resources :users
     resources :games do
@@ -8,6 +9,8 @@ MrLeaderboard::Application.routes.draw do
   end
   resources :users
   resource :user_session
+  
+  match '/activate/:activation_code' => 'activations#create'
   
   root :to => "leaderboards#index"
   
