@@ -1,21 +1,31 @@
 <h1>Leaderboards</h1>
 
 <table>
-<tr>
-  <td>Title</td>
-  <td>Actions</td>
-</tr>
+<thead>
+  <tr>
+    <th>Title</th>
+    <% if current_user %>
+      <th>Actions</th>
+    <% end %>
+  </tr>
+</thead>
+<tbody>
 <% unless @leaderboards.empty? %>
   <% @leaderboards.each do |leaderboard| %>
     <tr>
       <td><%= link_to leaderboard.title, leaderboard_url(leaderboard) %></td>
-      <td>
-        <%= link_to "Edit", edit_leaderboard_url(leaderboard) %>
-        <%= link_to "Destroy", leaderboard_url(leaderboard), :method => :delete, :confirm => "You sure?" %>
-      </td>
+      <% if current_user %>
+        <td class="actions">
+          <%= link_to "Edit", edit_leaderboard_url(leaderboard) %>
+          <%= link_to "Destroy", leaderboard_url(leaderboard), :method => :delete, :confirm => "You sure?" %>
+        </td>
+      <% end %>
     </tr>
   <% end %>
 <% end %>
+<tbody>
 </table>
 
-<%= link_to "Add leaderboard", new_leaderboard_url %>
+<% if current_user %>
+  <p><%= link_to "Add leaderboard", new_leaderboard_url %></p>
+<% end %>

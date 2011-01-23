@@ -1,5 +1,6 @@
-<h1>Add game</h1>
+<h1>Create game</h1>
 
 <%= form_for [@leaderboard, @game], :url => leaderboard_games_path do |f| %>
+  <%= f.hidden_field :leaderboard_id, :value => @leaderboard.id %>
   <%= f.submit %>
 <% end %>

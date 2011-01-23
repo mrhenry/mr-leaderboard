@@ -25,11 +25,6 @@ ActiveRecord::Schema.define(:version => 20110121091650) do
     t.datetime "updated_at"
   end
 
-  create_table "leaderboards_users", :id => false, :force => true do |t|
-    t.integer "leaderboard_id"
-    t.integer "user_id"
-  end
-
   create_table "memberships", :force => true do |t|
     t.integer  "leaderboard_id"
     t.integer  "user_id"

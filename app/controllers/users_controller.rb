@@ -12,7 +12,8 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     
     if @user.save
-      redirect_to users_path
+      flash[:notice] = "You're successfully registered"
+      redirect_to leaderboards_path
     else
       render :new
     end

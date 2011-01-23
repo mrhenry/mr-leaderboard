@@ -1,9 +1,15 @@
 <h1>Game</h1>
 
-<h2>Add score</h2>
-
-<%= form_for [@leaderboard, @game, @score], :url => leaderboard_game_scores_path do |f| %>
-  <div>
-    <%= f.error_messages %>
-  </div>
+<% unless @game.scores.empty? %>
+  <% @game.scores.each do |score| %>
+    <div>
+      <%= User.find(score.user_id).login %>: <%= score.score %>
+    </div>
+  <% end %>
 <% end %>
+
+<h2>Add score</h2>
+<%= render :partial => 'scores/form' %>
+
+
+<p><%= link_to "Back to leaderboard", leaderboard_url(params[:leaderboard_id]) %></p>

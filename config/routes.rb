@@ -7,6 +7,9 @@ MrLeaderboard::Application.routes.draw do
     end
   end
   resources :users
+  resource :user_session
+  
+  root :to => "leaderboards#index"
   
   
   # The priority is based upon order of creation:

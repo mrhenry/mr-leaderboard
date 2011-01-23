@@ -15,7 +15,7 @@ class GamesController < ApplicationController
     @game = Game.new(params[:game])
     
     if @game.save
-      render :edit
+      render :show
     else
       render :new
     end

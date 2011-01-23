@@ -1,0 +1,16 @@
+<%= form_for [@leaderboard, @game, Score.new] do |f| %>
+  <%= f.hidden_field :game_id, :value => @game.id %>
+  <div>
+    <%= f.error_messages %>
+  </div>
+  <div>
+    <%= f.label 'User' %>
+    <% @leaderboard_user_ids = @leaderboard.users.collect { |user| user.id.to_i } %>
+    <%= f.select(:user_id, options_from_collection_for_select(User.all, 'id', 'login', @leaderboard_user_ids)) %>
+  </div>
+  <div>
+    <%= f.label 'Score'%>
+    <%= f.text_field :score %>
+  </div>
+  <%= f.submit %>
+<% end %>
