@@ -2,7 +2,6 @@ class CreateGames < ActiveRecord::Migration
   def self.up
     create_table :games do |t|
       t.integer :leaderboard_id
-      t.integer :score_id
 
       t.timestamps
     end

@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   
-  helper_method :current_user_session, :current_user
+  helper_method :current_user_session, :current_user, :is_admin?
   filter_parameter_logging :password, :password_confirmation
   
 private
@@ -29,7 +29,6 @@ private
     if current_user
       store_location
       flash[:notice] = "You must be logged out to access this page"
-      #redirect_to account_url
       return false
     end
   end
@@ -37,10 +36,18 @@ private
   def store_location
     session[:return_to] = request.request_uri
   end
-
-  def redirect_back_or_default(default)
-    redirect_to(session[:return_to] || default)
-    session[:return_to] = nil
+  
+  def is_admin?
+    if current_user
+      Rails.logger.debug('------------------')
+      Rails.logger.debug(current_user.level)
+      Rails.logger.debug('------------------')
+      if current_user.level.to_i >= 1
+        return true
+      else
+        return false
+      end
+    end
   end
-      
+  
 end

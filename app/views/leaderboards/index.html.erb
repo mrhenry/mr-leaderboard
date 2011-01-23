@@ -4,7 +4,8 @@
 <thead>
   <tr>
     <th>Title</th>
-    <% if current_user %>
+    <th>Played games</th>
+    <% if current_user and is_admin? %>
       <th>Actions</th>
     <% end %>
   </tr>
@@ -14,7 +15,8 @@
   <% @leaderboards.each do |leaderboard| %>
     <tr>
       <td><%= link_to leaderboard.title, leaderboard_url(leaderboard) %></td>
-      <% if current_user %>
+      <td><%= leaderboard.games.count %></td>
+      <% if current_user and is_admin? %>
         <td class="actions">
           <%= link_to "Edit", edit_leaderboard_url(leaderboard) %>
           <%= link_to "Destroy", leaderboard_url(leaderboard), :method => :delete, :confirm => "You sure?" %>
@@ -26,6 +28,6 @@
 <tbody>
 </table>
 
-<% if current_user %>
+<% if current_user and is_admin? %>
   <p><%= link_to "Add leaderboard", new_leaderboard_url %></p>
 <% end %>

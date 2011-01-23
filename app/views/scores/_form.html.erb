@@ -1,7 +1,7 @@
 <%= form_for [@leaderboard, @game, Score.new] do |f| %>
   <%= f.hidden_field :game_id, :value => @game.id %>
   <div>
-    <%= f.error_messages %>
+    <%= error_messages_for :score %>
   </div>
   <div>
     <%= f.label 'User' %>

@@ -1,4 +1,4 @@
-<h1><%= @leaderboard.title %></h1>
+<h1><%= @leaderboard.title %> (<%= pluralize(@leaderboard.games.count, 'played game')%>)</h1>
 
 <h2>Leaderboard users</h2>
 <% unless @leaderboard.users.empty? %>
@@ -11,6 +11,9 @@
   
 <% else %>
   There are no user in this leaderboard.
+  <% if current_user and is_admin? %>
+    <%= link_to "Add users to leaderboard", edit_leaderboard_url(params[:id]) %>
+  <% end %>
 <% end %>
 
 <h2>Played games</h2>
@@ -19,10 +22,10 @@
   <ul class="games">
     <% @leaderboard.games.each do |game| %>
       <li>
-        <%= game.created_at %>
+        <%= link_to game.created_at, leaderboard_game_url(game.id) %>
         <% unless game.scores.empty? %>
           <%= User.find(game.scores[0].user_id).login %> [<%= game.scores[0].score %>] -
-          [<%= game.scores[1].score %>] <%= User.find(game.scores[1].user_id).login %>
+          [<%= game.scores[1].score rescue '...' %>] <%= User.find(game.scores[1].user_id).login rescue '...' %>
         <% else %>
           No scores added
         <% end %>
@@ -37,4 +40,4 @@
   <p><%= link_to "Add game", new_leaderboard_game_url(params[:id]) %></p>
 <% end %>
 
-<%= link_to "Back to leaderboard overview", leaderboards_url %>
+<p><%= link_to "Back to leaderboard overview", leaderboards_url %></p>

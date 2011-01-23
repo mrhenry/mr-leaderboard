@@ -14,7 +14,6 @@ ActiveRecord::Schema.define(:version => 20110121091650) do
 
   create_table "games", :force => true do |t|
     t.integer  "leaderboard_id"
-    t.integer  "score_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -48,6 +47,7 @@ ActiveRecord::Schema.define(:version => 20110121091650) do
   create_table "users", :force => true do |t|
     t.string   "login"
     t.string   "email"
+    t.string   "level"
     t.string   "crypted_password"
     t.string   "password_salt"
     t.string   "persistence_token"
