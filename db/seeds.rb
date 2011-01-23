@@ -10,4 +10,5 @@ User.create(:login => 'admin',
             :password => 'admin', 
             :password_confirmation => 'admin', 
             :email => 'admin@admin.com',
+            :active => true,
             :level => 2)
