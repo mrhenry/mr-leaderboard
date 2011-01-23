@@ -16,6 +16,7 @@
         <li><%= link_to "Register", new_user_path %></li>
         <li><%= link_to "Login", new_user_session_path %></li>
       <% else %>
+        <li>Welcome back <%= current_user.login %></li>
         <li><%= link_to "Your profile", user_url(current_user.id) %></li>
         <li><%= link_to "Logout", user_session_url(current_user.id), :method => :delete, :confirm => "Ready to log out?" %></li>
       <% end %>
