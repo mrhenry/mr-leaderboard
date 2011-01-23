@@ -15,12 +15,14 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     
-    if @user.save
-      flash[:notice] = "You're successfully registered"
-      redirect_to leaderboards_path
+    if @user.save_without_session_maintenance
+      @user.deliver_activation_instructions!
+      flash[:notice] = "Your user has been created. Please check your e-mail for activation instructions"
+      redirect_to leaderboards_url
     else
-      render :new
+      render :action => :new
     end
+    
   end
   
   def edit
@@ -29,8 +31,6 @@ class UsersController < ApplicationController
   
   def update
     @user = User.find(params[:user])
-    
-    
   end
   
 end

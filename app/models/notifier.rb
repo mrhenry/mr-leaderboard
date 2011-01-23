@@ -1,4 +1,4 @@
-class Notifier < ActiveRecord::Base
+class Notifier < ActionMailer::Base
   
   def activation_instructions(user)
     subject     "Activation instructions"

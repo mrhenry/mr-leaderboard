@@ -39,9 +39,6 @@ private
   
   def is_admin?
     if current_user
-      Rails.logger.debug('------------------')
-      Rails.logger.debug(current_user.level)
-      Rails.logger.debug('------------------')
       if current_user.level.to_i >= 1
         return true
       else

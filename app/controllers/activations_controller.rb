@@ -13,6 +13,7 @@ class ActivationsController < ApplicationController
       redirect_to leaderboards_url
     else
       render :action => :new
+    end
   end
 
 end
