@@ -24,8 +24,8 @@
       <li>
         <%= link_to game.created_at, leaderboard_game_url(@leaderboard.id, game.id) %>
         <% unless game.scores.empty? %>
-          <%= User.find(game.scores[0].user_id).login %> [<%= game.scores[0].score %>] -
-          [<%= game.scores[1].score rescue '...' %>] <%= User.find(game.scores[1].user_id).login rescue '...' %>
+          <%= User.find(game.scores[0].user_id).display_name %> [<%= game.scores[0].score %>] -
+          [<%= game.scores[1].score rescue '...' %>] <%= User.find(game.scores[1].user_id).display_name rescue '...' %>
         <% else %>
           No scores added
         <% end %>

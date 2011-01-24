@@ -6,7 +6,8 @@ class User < ActiveRecord::Base
   has_many :leaderboards, :through => :memberships
   has_many :games
   
-  validates_length_of :login, :maximum => 3
+  validates_length_of :display_name, :maximum => 3
+  validates_presence_of :display_name
   
   before_save :set_user_level
   

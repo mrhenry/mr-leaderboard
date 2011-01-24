@@ -1,5 +1,7 @@
 class LeaderboardsController < ApplicationController
   
+  before_filter :require_super_admin, :only => [:edit, :update, :destroy]
+  
   def index
     @leaderboards = Leaderboard.all
   end

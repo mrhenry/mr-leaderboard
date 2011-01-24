@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   
-  helper_method :current_user_session, :current_user, :is_admin?
+  helper_method :current_user_session, :current_user, :is_admin?, :require_super_admin
   filter_parameter_logging :password, :password_confirmation
   
 private
@@ -38,12 +38,20 @@ private
   end
   
   def is_admin?
-    if current_user
-      if current_user.level.to_i >= 1
-        return true
-      else
-        return false
-      end
+    if current_user and current_user.level.to_i >= 1
+      return true
+    else
+      return false
+    end
+  end
+  
+  def require_super_admin
+    if current_user and current_user.level.to_i >= 2
+      return true
+    else
+      flash[:notice] = "You are not authorized to see this page"
+      redirect_to root_url
+      return false
     end
   end
   
