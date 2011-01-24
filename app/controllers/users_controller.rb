@@ -16,9 +16,9 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     
     if @user.save_without_session_maintenance
-      @user.deliver_activation_instructions!
-      flash[:notice] = "Your user has been created. Please check your e-mail for activation instructions"
-      redirect_to leaderboards_url
+      @user.reset_perishable_token!
+      UserMailer.activation_instructions(@user).deliver
+      redirect_to leaderboards_url, :notice => "Your user has been created. Please check your e-mail for activation instructions"
     else
       render :action => :new
     end
