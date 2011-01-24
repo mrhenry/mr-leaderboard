@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
   has_many :leaderboards, :through => :memberships
   has_many :games
   
+  validates_length_of :login, :maximum => 3
+  
   before_save :set_user_level
   
   def deliver_activation_instructions!
