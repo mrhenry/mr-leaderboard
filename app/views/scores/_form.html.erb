@@ -5,8 +5,7 @@
   </div>
   <div>
     <%= f.label 'User' %>
-    <% @leaderboard_user_ids = @leaderboard.users.collect { |user| user.id.to_i } %>
-    <%= f.select(:user_id, options_from_collection_for_select(User.all, 'id', 'login', @leaderboard_user_ids)) %>
+    <%= f.select(:user_id, options_from_collection_for_select(@leaderboard.users, 'id', 'login')) %>
   </div>
   <div>
     <%= f.label 'Score'%>
