@@ -5,7 +5,10 @@
   
   <ul class="users">
     <% @leaderboard.users.each do |user| %>
-      <li><%= user.display_name %></li>
+      <li>
+        <%= image_tag gravatar(user.email, 50) %>
+        <%= user.display_name %>
+      </li>
     <% end %>
   </ul>
   
