@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   
-  helper_method :current_user_session, :current_user, :is_admin?, :require_super_admin
+  helper_method :current_user_session, :current_user, :is_admin?, :is_super_admin?, :require_super_admin
   filter_parameter_logging :password, :password_confirmation
   
 private

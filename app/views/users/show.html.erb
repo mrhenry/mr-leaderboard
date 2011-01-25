@@ -1,6 +1,7 @@
 <h1><%= @user.login%></h1>
-Email: <%= @user.email %><br>
-Display name: <%= @user.display_name %>
+<div><%= image_tag gravatar(@user.email) %></div>
+<div>Email: <%= @user.email %></div>
+<div>Display name: <%= @user.display_name %></div>
 <p><%= link_to "Edit your profile", edit_user_url(@user.id) %></p>
 
 <p><%= link_to "Back to leaderboard overview", leaderboards_url %></p>

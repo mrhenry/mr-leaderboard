@@ -12,13 +12,24 @@
     <%= f.label :email %>
     <%= f.text_field :email %>
   </div>
-  <div>
-    <%= f.label :password %>
-    <%= f.password_field :password %>
-  </div>
-  <div>
-    <%= f.label :password_confirmation %>
-    <%= f.password_field :password_confirmation %>
-  </div>
-  <%= f.submit %>
+  <% if params[:action] == 'new' %>
+    <div>
+      <%= f.label :password %>
+      <%= f.password_field :password %>
+    </div>
+    <div>
+      <%= f.label :password_confirmation %>
+      <%= f.password_field :password_confirmation %>
+    </div>
+  <% end %>
+  <% if is_admin? %>
+    <div>
+      <%= f.label :level %>
+      <%= f.select(:level, ['0','1','2'])%>
+    </div>
+  <% end %>
+  
+  <p><%= f.submit %></p>
 <% end %>
+
+<p><%= link_to "Cancel", root_url %></p>
