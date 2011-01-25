@@ -26,6 +26,14 @@ class User < ActiveRecord::Base
     save
   end
   
+  def is_leaderboard_user?
+    raise @leaderboard.inspect
+  end
+  
+  def is_admin?
+    self.level.to_i >= 2
+  end
+  
 private
 
   def set_user_level

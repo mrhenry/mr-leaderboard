@@ -26,4 +26,11 @@ class GamesController < ApplicationController
     @game = Game.find(params[:id])
   end
   
+  def destroy
+    @leaderboard = Leaderboard.find(params[:leaderboard_id])
+    @game = Game.find(params[:id])
+    @game.destroy
+    redirect_to leaderboard_url(@leaderboard), :notice => "Game deleted"
+  end
+  
 end

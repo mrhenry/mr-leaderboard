@@ -5,7 +5,7 @@
   <tr>
     <th>Title</th>
     <th>Played games</th>
-    <% if current_user and is_admin? %>
+    <% if current_user %>
       <th>Actions</th>
     <% end %>
   </tr>
@@ -16,7 +16,7 @@
     <tr>
       <td><%= link_to leaderboard.title, leaderboard_url(leaderboard) %></td>
       <td><%= leaderboard.games.count %></td>
-      <% if current_user and is_admin? %>
+      <% if current_user %>
         <td class="actions">
           <%= link_to "Edit", edit_leaderboard_url(leaderboard) %>
           <%= link_to "Destroy", leaderboard_url(leaderboard), :method => :delete, :confirm => "You sure?" %>
@@ -27,7 +27,6 @@
 <% end %>
 <tbody>
 </table>
-
-<% if current_user and is_admin? %>
+<% if current_user and current_user.is_admin? %>
   <p><%= link_to "Add leaderboard", new_leaderboard_url %></p>
 <% end %>

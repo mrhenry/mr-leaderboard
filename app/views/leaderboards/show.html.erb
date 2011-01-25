@@ -8,15 +8,18 @@
       <li>
         <%= image_tag gravatar(user.email, 50) %>
         <%= user.display_name %>
+        <%= membership_score(user) %>
       </li>
     <% end %>
   </ul>
   
 <% else %>
-  There are no user in this leaderboard.
-  <% if current_user and is_admin? %>
+
+  <p>There are no user in this leaderboard.</p>
+  <% if current_user and current_user.is_admin? %>
     <%= link_to "Add users to leaderboard", edit_leaderboard_url(params[:id]) %>
   <% end %>
+  
 <% end %>
 
 <h2>Played games</h2>
@@ -32,14 +35,20 @@
         <% else %>
           No scores added
         <% end %>
+        <% if current_user and current_user.is_admin? %>
+          <%= link_to "Destroy", leaderboard_game_url(@leaderboard, game.id), :method => :delete, :confirmation => "You sure?" %>
+        <% end %>
       </li>
     <% end %>
   </ul>
+  
 <% else %>
+
   No games added yet.
+  
 <% end %>
 
-<% if current_user and !@leaderboard.users.empty? %>
+<% if current_user and @leaderboard.users.count > 2 %>
   <p><%= link_to "Add game", new_leaderboard_game_url(params[:id]) %></p>
 <% end %>
 

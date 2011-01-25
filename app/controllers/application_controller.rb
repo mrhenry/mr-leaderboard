@@ -1,11 +1,23 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   
+  before_filter :test
   helper_method :current_user_session, :current_user, :is_admin?, :is_super_admin?, :require_super_admin
   filter_parameter_logging :password, :password_confirmation
   
 private
 
+  def test
+    #@leaderboard = Leaderboard.find(3)
+    #@leaderboard.games.each do |game|
+    #  game.scores.each do |score|
+    #    Rails.logger.debug('-----------')
+    #    Rails.logger.debug(score.inspect)
+    #    Rails.logger.debug('-----------')
+    #  end
+    #end
+  end
+  
   def current_user_session
     return @current_user_session if defined?(@current_user_session)
     @current_user_session = UserSession.find
@@ -35,14 +47,6 @@ private
 
   def store_location
     session[:return_to] = request.request_uri
-  end
-  
-  def is_admin?
-    if current_user and current_user.level.to_i >= 1
-      return true
-    else
-      return false
-    end
   end
   
   def require_super_admin
