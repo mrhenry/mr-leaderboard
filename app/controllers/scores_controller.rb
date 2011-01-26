@@ -14,7 +14,7 @@ class ScoresController < ApplicationController
     if @score.save
       if @game.scores.count == 2
         send_game_confirmation
-        notice = "Score added. We send a confirmation mail to the users of this game."
+        notice = "Score added."
       else
         notice = "Score added."
       end
@@ -30,7 +30,7 @@ private
     @game.scores.each do |score|
       score_user = User.find(score.user_id)
       unless score_user == current_user
-        UserMailer.game_confirmation(score_user, @game).deliver
+        #UserMailer.game_confirmation(score_user, @game).deliver
       end
     end
   end
