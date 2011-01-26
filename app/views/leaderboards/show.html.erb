@@ -10,7 +10,7 @@
         <%= user.display_name %>
         <%= membership_score(user) %> 
         <% if membership_played_sets(user) > 0 %>
-          (<%= (membership_score(user) / membership_played_sets(user)) * 100 %>% win percentage)
+          (<%= (Float(membership_score(user)) / Float(membership_played_sets(user)) * 100).round %>% win percentage)
         <% end %>
       </li>
     <% end %>
