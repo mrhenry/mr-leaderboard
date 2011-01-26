@@ -8,7 +8,10 @@
       <li>
         <%= image_tag gravatar(user.email, 50) %>
         <%= user.display_name %>
-        <%= membership_score(user) %>
+        <%= membership_score(user) %> 
+        <% if membership_played_sets(user) > 0 %>
+          (<%= (membership_score(user) / membership_played_sets(user)) * 100 %>% win percentage)
+        <% end %>
       </li>
     <% end %>
   </ul>
