@@ -7,10 +7,10 @@ class ActivationsController < ApplicationController
     #raise Exception if @user.active?
     
     if @user.activate!
-      flash[:notice] = "Your user has been activated!"
+      @user.reset_perishable_token!
+      UserMailer.welcome(@user).deliver
       UserSession.create(@user)
-      @user.deliver_welcome!
-      redirect_to leaderboards_url
+      redirect_to leaderboards_url, :notice => "Your user has been activated!"
     else
       render :action => :new
     end
