@@ -22,7 +22,7 @@
       <%= f.password_field :password_confirmation %>
     </div>
   <% end %>
-  <% if is_admin? %>
+  <% if current_user and current_user.is_admin? %>
     <div>
       <%= f.label :level %>
       <%= f.select(:level, ['0','1','2'])%>

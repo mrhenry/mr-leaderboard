@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   
   before_filter :require_user, :only => [:show, :edit]
   before_filter :require_super_admin, :only => [:index]
-  before_filter :requre_no_user, :only => [:new, :create]
+  before_filter :require_no_user, :only => [:new, :create]
   
   def index
     @users = User.all
