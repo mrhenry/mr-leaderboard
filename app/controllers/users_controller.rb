@@ -1,5 +1,9 @@
 class UsersController < ApplicationController
   
+  before_filter :require_user, :only => [:show, :edit]
+  before_filter :require_super_admin, :only => [:index]
+  before_filter :requre_no_user, :only => [:new, :create]
+  
   def index
     @users = User.all
   end
@@ -30,7 +34,13 @@ class UsersController < ApplicationController
   end
   
   def update
-    @user = User.find(params[:user])
+    @user = User.find(params[:id])
+    
+    if @user.update_attributes(params[:user])
+      redirect_to user_url(@user.id), :notice => "User updated"
+    else
+      render :action => :edit
+    end
   end
   
 end

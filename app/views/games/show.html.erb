@@ -3,7 +3,7 @@
 <% unless @game.scores.empty? %>
   <% @game.scores.each do |score| %>
     <div>
-      <%= User.find(score.user_id).login %>: <%= score.score %>
+      <%= User.find(score.user_id).display_name %>: <%= score.score %>
     </div>
   <% end %>
 <% end %>
