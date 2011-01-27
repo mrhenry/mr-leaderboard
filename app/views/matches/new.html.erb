@@ -1,0 +1,6 @@
+<h1>Create match</h1>
+
+<%= form_for [@leaderboard, @match], :url => leaderboard_matches_path do |f| %>
+  <%= f.hidden_field :leaderboard_id, :value => @leaderboard.id %>
+  <%= f.submit %>
+<% end %>

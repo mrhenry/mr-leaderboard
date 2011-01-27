@@ -14,4 +14,10 @@ module LeaderboardsHelper
     end
   end
   
+  def user_played_sets_win_percentage(user)
+    unless user.nil?
+      (Float(membership_score(user)) / Float(membership_played_sets(user)) * 100).round
+    end
+  end
+  
 end

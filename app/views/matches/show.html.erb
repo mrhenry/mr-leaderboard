@@ -1,0 +1,15 @@
+<h1>Match</h1>
+
+<% unless @match.scores.empty? %>
+  <% @match.scores.each do |score| %>
+    <div>
+      <%= User.find(score.user_id).display_name %>: <%= score.score %>
+    </div>
+  <% end %>
+<% end %>
+
+<h2>Add score</h2>
+<%= render :partial => 'scores/form' %>
+
+
+<p><%= link_to "Back to leaderboard", leaderboard_url(params[:leaderboard_id]) %></p>

@@ -3,9 +3,9 @@
 one:
   user_id: 1
   score: 1
-  game_id: 1
+  match_id: 1
 
 two:
   user_id: 1
   score: 1
-  game_id: 1
+  match_id: 1

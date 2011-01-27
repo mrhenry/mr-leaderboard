@@ -1,5 +1,5 @@
-<%= form_for [@leaderboard, @game, Score.new] do |f| %>
-  <%= f.hidden_field :game_id, :value => @game.id %>
+<%= form_for [@leaderboard, @match, Score.new] do |f| %>
+  <%= f.hidden_field :match_id, :value => @match.id %>
   <div>
     <%= error_messages_for :score %>
   </div>

@@ -3,7 +3,7 @@ MrLeaderboard::Application.routes.draw do
 
   resources :leaderboards do
     resources :users
-    resources :games do
+    resources :matches do
       resources :scores
     end
   end

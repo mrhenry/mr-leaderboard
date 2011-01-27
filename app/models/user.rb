@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   
   has_many :memberships
   has_many :leaderboards, :through => :memberships
-  has_many :games
+  has_many :matches
   
   validates_length_of :display_name, :maximum => 3
   validates_presence_of :display_name

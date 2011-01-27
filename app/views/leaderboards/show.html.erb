@@ -1,4 +1,4 @@
-<h1><%= @leaderboard.title %> (<%= pluralize(@leaderboard.games.count, 'played game')%>)</h1>
+<h1><%= @leaderboard.title %> (<%= pluralize(@leaderboard.matches.count, 'played match')%>)</h1>
 
 <h2>Leaderboard users</h2>
 <% unless @leaderboard.users.empty? %>
@@ -10,7 +10,7 @@
         <%= user.display_name %>
         <%= membership_score(user) %> 
         <% if membership_played_sets(user) > 0 %>
-          (<%= (Float(membership_score(user)) / Float(membership_played_sets(user)) * 100).round %>% win percentage)
+          (<%= user_played_sets_win_percentage(user) %>% win percentage)
         <% end %>
       </li>
     <% end %>
@@ -25,21 +25,21 @@
   
 <% end %>
 
-<h2>Played games</h2>
-<% unless @leaderboard.games.empty? %>
+<h2>Played matches</h2>
+<% unless @leaderboard.matches.empty? %>
   
-  <ul class="games">
-    <% @leaderboard.games.each do |game| %>
+  <ul class="matches">
+    <% @leaderboard.matches.each do |match| %>
       <li>
-        <%= link_to game.created_at, leaderboard_game_url(@leaderboard.id, game.id) %>
-        <% unless game.scores.empty? %>
-          <%= User.find(game.scores[0].user_id).display_name %> [<%= game.scores[0].score %>] -
-          [<%= game.scores[1].score rescue '...' %>] <%= User.find(game.scores[1].user_id).display_name rescue '...' %>
+        <%= link_to match.created_at, leaderboard_match_url(@leaderboard.id, match.id) %>
+        <% unless match.scores.empty? %>
+          <%= User.find(match.scores[0].user_id).display_name %> [<%= match.scores[0].score %>] -
+          [<%= match.scores[1].score rescue '...' %>] <%= User.find(match.scores[1].user_id).display_name rescue '...' %>
         <% else %>
           No scores added
         <% end %>
         <% if current_user and current_user.is_admin? %>
-          <%= link_to "Destroy", leaderboard_game_url(@leaderboard, game.id), :method => :delete, :confirmation => "You sure?" %>
+          <%= link_to "Destroy", leaderboard_match_url(@leaderboard, match.id), :method => :delete, :confirmation => "You sure?" %>
         <% end %>
       </li>
     <% end %>
@@ -47,12 +47,12 @@
   
 <% else %>
 
-  No games added yet.
+  No matches added yet.
   
 <% end %>
 
 <% if current_user and @leaderboard.users.count > 2 %>
-  <p><%= link_to "Add game", new_leaderboard_game_url(params[:id]) %></p>
+  <p><%= link_to "Add match", new_leaderboard_match_url(params[:id]) %></p>
 <% end %>
 
 <p><%= link_to "Back to leaderboard overview", leaderboards_url %></p>
