@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110127062016) do
+ActiveRecord::Schema.define(:version => 20110130101602) do
 
   create_table "leaderboards", :force => true do |t|
     t.string   "title"
@@ -29,8 +29,8 @@ ActiveRecord::Schema.define(:version => 20110127062016) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "score",          :default => 0
-    t.integer  "played_sets",    :default => 0
+    t.integer  "won_games",      :default => 0
+    t.integer  "played_games",   :default => 0
   end
 
   create_table "scores", :force => true do |t|

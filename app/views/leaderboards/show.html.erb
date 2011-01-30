@@ -8,9 +8,9 @@
       <li>
         <%= image_tag gravatar(user.email, 50) %>
         <%= user.display_name %>
-        <%= membership_score(user) %> 
-        <% if membership_played_sets(user) > 0 %>
-          (<%= user_played_sets_win_percentage(user) %>% win percentage)
+        <%= membership_won_games(user) %> 
+        <% if membership_played_games(user) > 0 %>
+          (<%= user_played_games_win_percentage(user) %>% win percentage)
         <% end %>
       </li>
     <% end %>
@@ -51,7 +51,7 @@
   
 <% end %>
 
-<% if current_user and @leaderboard.users.count > 2 %>
+<% if current_user and @leaderboard.users.count >= 2 %>
   <p><%= link_to "Add match", new_leaderboard_match_url(params[:id]) %></p>
 <% end %>
 
