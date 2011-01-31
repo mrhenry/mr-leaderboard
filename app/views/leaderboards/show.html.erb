@@ -29,11 +29,11 @@
   
 <% end %>
 
-<h2>Played matches</h2>
+<h2>Latest 5 played matches</h2>
 <% unless @leaderboard.matches.empty? %>
   
   <ul class="matches">
-    <% @leaderboard.matches.each do |match| %>
+    <% @leaderboard.matches[0..4].each do |match| %>
       <li>
         <%= link_to match.created_at, leaderboard_match_url(@leaderboard.id, match.id) %>
         <% unless match.scores.empty? %>

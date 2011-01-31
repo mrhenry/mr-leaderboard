@@ -13,15 +13,15 @@
 ActiveRecord::Schema.define(:version => 20110130101602) do
 
   create_table "leaderboards", :force => true do |t|
-    t.string   "title"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string    "title"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
   end
 
   create_table "matches", :force => true do |t|
-    t.integer  "leaderboard_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer   "leaderboard_id"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
   end
 
   create_table "memberships", :force => true do |t|
@@ -42,30 +42,30 @@ ActiveRecord::Schema.define(:version => 20110130101602) do
   end
 
   create_table "user_sessions", :force => true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
   end
 
   create_table "users", :force => true do |t|
-    t.string   "login"
-    t.string   "email"
-    t.string   "level"
-    t.string   "crypted_password"
-    t.string   "password_salt"
-    t.string   "persistence_token"
-    t.string   "single_access_token"
-    t.string   "perishable_token"
-    t.integer  "login_count"
-    t.integer  "failed_login_count"
-    t.datetime "last_request_at"
-    t.datetime "current_login_at"
-    t.datetime "last_login_at"
-    t.string   "current_login_ip"
-    t.string   "last_login_ip"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.boolean  "active",              :default => false, :null => false
-    t.string   "display_name"
+    t.string    "login"
+    t.string    "email"
+    t.string    "level"
+    t.string    "crypted_password"
+    t.string    "password_salt"
+    t.string    "persistence_token"
+    t.string    "single_access_token"
+    t.string    "perishable_token"
+    t.integer   "login_count"
+    t.integer   "failed_login_count"
+    t.timestamp "last_request_at"
+    t.timestamp "current_login_at"
+    t.timestamp "last_login_at"
+    t.string    "current_login_ip"
+    t.string    "last_login_ip"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
+    t.boolean   "active",              :default => false, :null => false
+    t.string    "display_name"
   end
 
 end

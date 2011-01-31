@@ -57,15 +57,28 @@ class LeaderboardsController < ApplicationController
     
     @leaderboard.matches.each do |match|
       
-      played_games_per_match = 0
+      # Set played games
+      total_match_games = 0
+      if match.scores.count > 1
+        total_match_games = 0
+        match.scores.each do |score|
+          total_match_games += score.score
+        end
+        match.scores.each do |score|
+          membership = Membership.first(:conditions => ["leaderboard_id = ? and user_id = ?", match.leaderboard_id, score.user_id])
+          membership.played_games += total_match_games
+          membership.update_attributes(membership)
+        end
+      end
       
+      # set won games
       match.scores.each do |score|
         score.update_membership_won_games
-        score.update_membership_played_games
       end
       
     end
     
+    flash[:notice] = "Leaderboard recalculation complete"
     show
     
   end

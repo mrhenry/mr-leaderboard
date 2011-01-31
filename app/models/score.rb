@@ -14,21 +14,21 @@ class Score < ActiveRecord::Base
   
   def update_membership_won_games
     match = Match.find(self.match_id)
-    membership  = Membership.first(:conditions => ["leaderboard_id = ? and user_id = ?", match.leaderboard_id, self.user_id])
+    membership = Membership.first(:conditions => ["leaderboard_id = ? and user_id = ?", match.leaderboard_id, self.user_id])
     membership.won_games += self.score
     membership.update_attributes(membership)
   end
   
   def update_membership_played_games
     match = Match.find(self.match_id)
-    played_games_per_match = 0
-    if match.scores.count >= 2
+    if match.scores.count > 1
+      total_match_games = 0
       match.scores.each do |score|
-        played_games_per_match += score.score
+        total_match_games += score.score
       end
       match.scores.each do |score|
         membership = Membership.first(:conditions => ["leaderboard_id = ? and user_id = ?", match.leaderboard_id, score.user_id])
-        membership.played_games += played_games_per_match
+        membership.played_games += total_match_games
         membership.update_attributes(membership)
       end
     end
