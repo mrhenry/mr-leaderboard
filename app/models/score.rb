@@ -7,8 +7,7 @@ class Score < ActiveRecord::Base
            :all_different_users_per_match
   validates_presence_of :score
   
-  #after_save :update_memberships
-  
+  #after_save :update_membership_won_matches
   after_save :update_membership_won_games
   after_save :update_membership_played_games
   
@@ -31,6 +30,21 @@ class Score < ActiveRecord::Base
         membership.played_games += total_match_games
         membership.update_attributes(membership)
       end
+    end
+  end
+  
+  def update_membership_won_matches
+    match = Match.find(self.match_id)
+    if match.scores.count > 1
+      match.scores.each_with_index do |score, idx|
+        if highest_score.nil? or score.score > highest_score
+          highest_score = score.score
+          winner = score
+        end
+      end
+      membership = Membership.first(:conditions => ["leaderboard_id = ? and user_id = ?", match.leaderboard_id, winner.user_id])
+      membership.won_matches += highest_score
+      membership.update_attributes(membership)
     end
   end
   

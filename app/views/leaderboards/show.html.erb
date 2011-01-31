@@ -3,18 +3,29 @@
 <h2>Leaderboard users</h2>
 <% unless @leaderboard.users.empty? %>
   
-  <ul class="users">
+  <table cellpadding="5" border="1" style="border-collapse:collapse">
+    <thead>
+      <tr>
+        <th>User</th>
+        <th>Won games</th>
+        <th>Games win percentage (Won games / played games)</th>
+      </tr>
+    </thead>
     <% @leaderboard.users.each do |user| %>
-      <li>
-        <%= image_tag gravatar(user.email, 50) %>
-        <%= user.display_name %>
-        <%= membership_won_games(user) %> 
-        <% if membership_played_games(user) > 0 %>
-          (<%= user_played_games_win_percentage(user) %>% win percentage)
-        <% end %>
-      </li>
+      <tr>
+        <td>
+          <%= image_tag gravatar(user.email, 50) %><br>
+          <%= user.display_name %>
+        </td>
+        <td><%= membership_won_games(user) %></td>
+        <td>
+          <% if membership_played_games(user) > 0 %>
+            (<%= user_played_games_win_percentage(user) %>% win percentage)
+          <% end %>
+        </td>
+      </tr>
     <% end %>
-  </ul>
+  </table>
   
   <% if current_user and current_user.is_admin? %>
     <p><%= link_to "Recalculate memberships", recalculate_memberships_url(@leaderboard.id) %></p>
@@ -48,6 +59,8 @@
       </li>
     <% end %>
   </ul>
+  
+  <p><%= link_to "View all matches", leaderboard_matches_url(params[:id]) %></p>
   
 <% else %>
 

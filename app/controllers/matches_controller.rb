@@ -1,5 +1,9 @@
 class MatchesController < ApplicationController
   
+  def index
+    @leaderboard = Leaderboard.find(params[:leaderboard_id])
+  end
+  
   def show
     @leaderboard = Leaderboard.find(params[:leaderboard_id])
     @match = Match.find(params[:id])
