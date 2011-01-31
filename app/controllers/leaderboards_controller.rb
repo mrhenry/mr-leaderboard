@@ -8,6 +8,7 @@ class LeaderboardsController < ApplicationController
   
   def show
     @leaderboard = Leaderboard.find(params[:id])
+    render :show
   end
   
   def new
@@ -45,6 +46,28 @@ class LeaderboardsController < ApplicationController
     @leaderboard = Leaderboard.find(params[:id])
     @leaderboard.destroy
     redirect_to leaderboards_url
+  end
+  
+  def recalculate_memberships
+    @leaderboard = Leaderboard.find(params[:id])
+    
+    @leaderboard.memberships.each do |membership|
+      membership.reset
+    end
+    
+    @leaderboard.matches.each do |match|
+      
+      played_games_per_match = 0
+      
+      match.scores.each do |score|
+        score.update_membership_won_games
+        score.update_membership_played_games
+      end
+      
+    end
+    
+    show
+    
   end
   
 end

@@ -10,6 +10,7 @@ MrLeaderboard::Application.routes.draw do
   resources :users
   resource :user_session
   
+  match '/leaderboards/:id/recalculate-memberships' => 'leaderboards#recalculate_memberships', :as => :recalculate_memberships
   match '/activate/:activation_code' => 'activations#create', :as => :activate
   
   root :to => "leaderboards#index"
