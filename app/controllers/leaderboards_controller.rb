@@ -71,15 +71,29 @@ class LeaderboardsController < ApplicationController
         end
       end
       
-      # set won games
+      # set won games & played matches
       match.scores.each do |score|
         score.update_membership_won_games
+        score.update_membership_played_matches
+      end
+      
+      # set won matches
+      if match.scores.count > 1
+        highest_score = nil
+        match.scores.each do |score|
+          match.scores.each do |score|
+            highest_score = score if highest_score.nil? or score.score > highest_score.score
+          end
+        end
+        membership = Membership.first(:conditions => ["leaderboard_id = ? and user_id = ?", match.leaderboard_id, highest_score.user_id])
+        membership.won_matches += 1
+        membership.update_attributes(membership)
       end
       
     end
     
     flash[:notice] = "Leaderboard recalculation complete"
-    show
+    redirect_to leaderboard_url(@leaderboard)
     
   end
   

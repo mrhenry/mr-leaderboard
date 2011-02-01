@@ -7,8 +7,12 @@
     <thead>
       <tr>
         <th>User</th>
+        <th>Won matches</th>
+        <th>Played matches</th>
+        <th>Match win percentage<br>(Won matches / played matches)</th>
         <th>Won games</th>
-        <th>Games win percentage (Won games / played games)</th>
+        <th>Played games</th>
+        <th>Games win percentage<br>(Won games / played games)</th>
       </tr>
     </thead>
     <% @leaderboard.users.each do |user| %>
@@ -17,10 +21,18 @@
           <%= image_tag gravatar(user.email, 50) %><br>
           <%= user.display_name %>
         </td>
+        <td><%= membership_won_matches(user) %></td>
+        <td><%= membership_played_matches(user) %></td>
+        <td>
+          <% if membership_played_matches(user) > 0 %>
+            <%= membership_match_win_percentage(user) %>%
+          <% end %>
+        </td>
         <td><%= membership_won_games(user) %></td>
+        <td><%= membership_played_games(user) %></td>
         <td>
           <% if membership_played_games(user) > 0 %>
-            (<%= user_played_games_win_percentage(user) %>% win percentage)
+            <%= membership_games_win_percentage(user) %>%
           <% end %>
         </td>
       </tr>
