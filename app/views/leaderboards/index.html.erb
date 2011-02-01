@@ -5,7 +5,7 @@
   <tr>
     <th>Title</th>
     <th>Played matches</th>
-    <% if current_user %>
+    <% if current_user and current_user.is_admin? %>
       <th>Actions</th>
     <% end %>
   </tr>
@@ -18,8 +18,10 @@
       <td><%= leaderboard.matches.count %></td>
       <% if current_user %>
         <td class="actions">
-          <%= link_to "Edit", edit_leaderboard_url(leaderboard) %>
-          <%= link_to "Destroy", leaderboard_url(leaderboard), :method => :delete, :confirm => "You sure?" %>
+          <% if current_user and current_user.is_admin? %>
+            <%= link_to "Edit", edit_leaderboard_url(leaderboard) %>
+            <%= link_to "Destroy", leaderboard_url(leaderboard), :method => :delete, :confirm => "You sure?" %>
+          <% end %>
         </td>
       <% end %>
     </tr>
