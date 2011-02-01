@@ -1,5 +1,7 @@
 class MatchesController < ApplicationController
   
+  before_filter :require_user, :only => [:index, :show, :new, :create, :edit, :destroy]
+  
   def index
     @leaderboard = Leaderboard.find(params[:leaderboard_id])
   end

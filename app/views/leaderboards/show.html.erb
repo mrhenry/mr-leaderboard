@@ -58,7 +58,11 @@
   <ul class="matches">
     <% @leaderboard.matches[0..4].each do |match| %>
       <li>
-        <%= link_to match.created_at, leaderboard_match_url(@leaderboard.id, match.id) %>
+        <% if current_user %>
+          <%= link_to match.created_at.strftime("%Y-%m-%d %H:%M"), leaderboard_match_url(@leaderboard.id, match.id) %>
+        <% else %>
+          <%= match.created_at.strftime("%Y-%m-%d %H:%M") %>
+        <% end %>
         <% unless match.scores.empty? %>
           <%= User.find(match.scores[0].user_id).display_name %> [<%= match.scores[0].score %>] -
           [<%= match.scores[1].score rescue '...' %>] <%= User.find(match.scores[1].user_id).display_name rescue '...' %>
@@ -72,7 +76,9 @@
     <% end %>
   </ul>
   
-  <p><%= link_to "View all matches", leaderboard_matches_url(params[:id]) %></p>
+  <% if current_user %>
+    <p><%= link_to "View all matches", leaderboard_matches_url(params[:id]) %></p>
+  <% end %>
   
 <% else %>
 
