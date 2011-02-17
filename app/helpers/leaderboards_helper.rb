@@ -14,12 +14,6 @@ module LeaderboardsHelper
     end
   end
   
-  def membership_match_win_percentage(user)
-    unless user.nil?
-      (Float(membership_won_matches(user)) / Float(membership_played_matches(user)) * 100).round
-    end
-  end
-  
   def membership_won_games(user)
     unless user.nil?
       membership = Membership.first(:conditions => ['leaderboard_id=? and user_id=?', @leaderboard.id, user.id])

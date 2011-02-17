@@ -1,7 +1,7 @@
 <h1><%= @leaderboard.title %> (<%= pluralize(@leaderboard.matches.count, 'played match')%>)</h1>
 
 <h2>Leaderboard users</h2>
-<% unless @leaderboard.users.empty? %>
+<% unless @leaderboard.memberships.empty? %>
   
   <table cellpadding="5" border="1" style="border-collapse:collapse">
     <thead>
@@ -15,26 +15,18 @@
         <th>Games win percentage<br>(Won games / played games)</th>
       </tr>
     </thead>
-    <% @leaderboard.users.each do |user| %>
+    <% @leaderboard.memberships.each do |membership| %>
       <tr>
         <td>
-          <%= image_tag gravatar(user.email, 50) %><br>
-          <%= user.display_name %>
+          <%= image_tag gravatar(membership.user.email, 50) %><br>
+          <%= membership.user.display_name %>
         </td>
-        <td><%= membership_won_matches(user) %></td>
-        <td><%= membership_played_matches(user) %></td>
-        <td>
-          <% if membership_played_matches(user) > 0 %>
-            <%= membership_match_win_percentage(user) %>%
-          <% end %>
-        </td>
-        <td><%= membership_won_games(user) %></td>
-        <td><%= membership_played_games(user) %></td>
-        <td>
-          <% if membership_played_games(user) > 0 %>
-            <%= membership_games_win_percentage(user) %>%
-          <% end %>
-        </td>
+        <td><%= membership.won_matches %></td>
+        <td><%= membership.played_matches %></td>
+        <td><%= membership.match_win_percentage if membership.played_matches > 0 %>%</td>
+        <td><%= membership.won_games %></td>
+        <td><%= membership.played_games %></td>
+        <td><%= membership.game_win_percentage if membership.played_games > 0 %>%</td>
       </tr>
     <% end %>
   </table>
