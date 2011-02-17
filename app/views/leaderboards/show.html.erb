@@ -65,7 +65,7 @@
         <% else %>
           No scores added
         <% end %>
-        <% if current_user and current_user.is_admin? %>
+        <% if current_user and current_user.is_leaderboard_member?(@leaderboard) %>
           <%= link_to "Destroy", leaderboard_match_url(@leaderboard, match.id), :method => :delete, :confirmation => "You sure?" %>
         <% end %>
       </li>
