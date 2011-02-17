@@ -16,8 +16,10 @@ class User < ActiveRecord::Base
     save
   end
   
-  def is_leaderboard_user?
-    raise @leaderboard.inspect
+  def is_leaderboard_member?(leaderboard = nil)
+    return if leaderboard.nil?
+    leaderboard.memberships.each { |m| return true if m.id == self.id  }
+    return false
   end
   
   def is_admin?

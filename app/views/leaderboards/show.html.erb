@@ -39,8 +39,12 @@
     <% end %>
   </table>
   
+  <% if current_user and current_user.is_leaderboard_member?(@leaderboard) %>
+    <p><%= link_to "Add match", new_leaderboard_match_url(params[:id]) %></p>
+  <% end %>
+  
   <% if current_user and current_user.is_admin? %>
-    <p><%= link_to "Recalculate memberships", recalculate_memberships_url(@leaderboard.id) %></p>
+    <p><%= link_to "Recalculate memberships", recalculate_memberships_url(@leaderboard.id) %> (Can take a while)</p>
   <% end %>
   
 <% else %>
@@ -84,10 +88,6 @@
 
   No matches added yet.
   
-<% end %>
-
-<% if current_user and @leaderboard.users.count >= 2 %>
-  <p><%= link_to "Add match", new_leaderboard_match_url(params[:id]) %></p>
 <% end %>
 
 <p><%= link_to "Back to leaderboard overview", leaderboards_url %></p>

@@ -15,10 +15,4 @@ class UserMailer < ActionMailer::Base
          :subject => "Welcome to Mr. Leaderboard")
   end
   
-  def match_confirmation(user, match)
-    @match = match
-    mail(:to => user.email,
-         :subject => "Can you confirm this match?")
-  end
-  
 end
