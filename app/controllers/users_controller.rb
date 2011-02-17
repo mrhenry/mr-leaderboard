@@ -43,4 +43,18 @@ class UsersController < ApplicationController
     end
   end
   
+  def edit_password
+    @user = User.find(params[:user_id])
+  end
+  
+  def update_password
+    @user = User.find(params[:user_id])
+    
+    if @user.update_attributes(params[:user])
+      redirect_to user_url(@user.id), :notice => "Password changed"
+    else
+      render :action => :edit_password
+    end
+  end
+  
 end

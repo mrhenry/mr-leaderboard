@@ -7,7 +7,12 @@ MrLeaderboard::Application.routes.draw do
       resources :scores
     end
   end
-  resources :users
+  
+  resources :users do
+    get '/edit-password'    => 'users#edit_password',   :as => :edit_password
+    match '/update-password' => 'users#update_password',  :as => :update_password
+  end
+  
   resource :user_session
   
   match '/leaderboards/:id/recalculate-memberships' => 'leaderboards#recalculate_memberships', :as => :recalculate_memberships
