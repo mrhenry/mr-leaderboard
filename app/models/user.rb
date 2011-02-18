@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
   
   def is_leaderboard_member?(leaderboard = nil)
     return if leaderboard.nil?
-    leaderboard.memberships.each { |m| return true if m.id == self.id  }
+    leaderboard.memberships.each { |m| return true if m.user_id == self.id  }
     return false
   end
   
