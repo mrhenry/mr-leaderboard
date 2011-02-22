@@ -13,13 +13,13 @@ class MatchesController < ApplicationController
   
   def new
     @leaderboard = Leaderboard.find(params[:leaderboard_id])
-    @match = Match.new
+    @match = Match.new(
+      :leaderboard_id => @leaderboard.id
+    )
+    create
   end
   
   def create
-    @leaderboard = Leaderboard.find(params[:leaderboard_id])
-    @match = Match.new(params[:match])
-    
     if @match.save
       render :show
     else
