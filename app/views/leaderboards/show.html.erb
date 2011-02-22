@@ -31,7 +31,7 @@
     <% end %>
   </table>
   
-  <% if current_user and current_user.is_leaderboard_member?(@leaderboard) or current_user and current_user.is_admin? %>
+  <% if (current_user and current_user.is_leaderboard_member?(@leaderboard)) or (current_user and current_user.is_admin?) %>
     <p><%= link_to "Add match", new_leaderboard_match_url(params[:id]) %></p>
   <% end %>
   
