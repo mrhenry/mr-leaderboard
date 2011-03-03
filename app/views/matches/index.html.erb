@@ -7,12 +7,12 @@
       <li>
         <%= link_to match.created_at, leaderboard_match_url(@leaderboard.id, match.id) %>
         <% unless match.scores.empty? %>
-          <%= User.find(match.scores[0].user_id).display_name %> [<%= match.scores[0].score %>] -
-          [<%= match.scores[1].score rescue '...' %>] <%= User.find(match.scores[1].user_id).display_name rescue '...' %>
+          <%= Membership.find(match.scores[0].membership_id).user.display_name %> [<%= match.scores[0].score %>] -
+          [<%= match.scores[1].score rescue '...' %>] <%= Membership.find(match.scores[1].membership_id).user.display_name rescue '...' %>
         <% else %>
           No scores added
         <% end %>
-        <% if current_user and current_user.is_admin? %>
+        <% if current_user and current_user.is_leaderboard_member?(@leaderboard) %>
           <%= link_to "Destroy", leaderboard_match_url(@leaderboard, match.id), :method => :delete, :confirmation => "You sure?" %>
         <% end %>
       </li>
