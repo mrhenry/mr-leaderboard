@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110201211952) do
+ActiveRecord::Schema.define(:version => 20110303192956) do
 
   create_table "leaderboards", :force => true do |t|
     t.string    "title"
@@ -24,15 +24,26 @@ ActiveRecord::Schema.define(:version => 20110201211952) do
     t.timestamp "updated_at"
   end
 
+  create_table "membership_to_memberships", :id => false, :force => true do |t|
+    t.integer  "membership_id"
+    t.integer  "opponent_id"
+    t.integer  "won_games",      :default => 0
+    t.integer  "played_games",   :default => 0
+    t.integer  "won_matches",    :default => 0
+    t.integer  "played_matches", :default => 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "memberships", :force => true do |t|
-    t.integer   "leaderboard_id"
-    t.integer   "user_id"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
-    t.integer   "won_games",      :default => 0
-    t.integer   "played_games",   :default => 0
-    t.integer   "won_matches",    :default => 0
-    t.integer   "played_matches", :default => 0
+    t.integer  "leaderboard_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "won_games",      :default => 0
+    t.integer  "played_games",   :default => 0
+    t.integer  "won_matches",    :default => 0
+    t.integer  "played_matches", :default => 0
   end
 
   create_table "scores", :force => true do |t|
@@ -41,6 +52,7 @@ ActiveRecord::Schema.define(:version => 20110201211952) do
     t.integer   "match_id"
     t.timestamp "created_at"
     t.timestamp "updated_at"
+    t.integer   "membership_id"
   end
 
   create_table "user_sessions", :force => true do |t|

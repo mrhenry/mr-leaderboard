@@ -3,7 +3,7 @@
 <% unless @match.scores.empty? %>
   <% @match.scores.each do |score| %>
     <div>
-      <%= User.find(score.user_id).display_name %>: <%= score.score %>
+      <%= Membership.find(score.membership_id).user.display_name %>: <%= score.score %>
     </div>
   <% end %>
 <% end %>

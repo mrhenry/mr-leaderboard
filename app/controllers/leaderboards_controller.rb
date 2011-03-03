@@ -51,45 +51,14 @@ class LeaderboardsController < ApplicationController
   def recalculate_memberships
     @leaderboard = Leaderboard.find(params[:id])
     
+    # Reset memberships
     @leaderboard.memberships.each do |membership|
       membership.reset
     end
     
+    # Update memberships
     @leaderboard.matches.each do |match|
-      
-      # Set played games
-      total_match_games = 0
-      if match.scores.count > 1
-        total_match_games = 0
-        match.scores.each do |score|
-          total_match_games += score.score
-        end
-        match.scores.each do |score|
-          membership = Membership.first(:conditions => ["leaderboard_id = ? and user_id = ?", match.leaderboard_id, score.user_id])
-          membership.played_games += total_match_games
-          membership.update_attributes(membership)
-        end
-      end
-      
-      # set won games & played matches
-      match.scores.each do |score|
-        score.update_membership_won_games
-        score.update_membership_played_matches
-      end
-      
-      # set won matches
-      if match.scores.count > 1
-        highest_score = nil
-        match.scores.each do |score|
-          match.scores.each do |score|
-            highest_score = score if highest_score.nil? or score.score > highest_score.score
-          end
-        end
-        membership = Membership.first(:conditions => ["leaderboard_id = ? and user_id = ?", match.leaderboard_id, highest_score.user_id])
-        membership.won_matches += 1
-        membership.update_attributes(membership)
-      end
-      
+      match.add_membership_statistics
     end
     
     flash[:notice] = "Leaderboard recalculation complete"

@@ -60,8 +60,8 @@
           <%= match.created_at.strftime("%Y-%m-%d %H:%M") %>
         <% end %>
         <% unless match.scores.empty? %>
-          <%= User.find(match.scores[0].user_id).display_name %> [<%= match.scores[0].score %>] -
-          [<%= match.scores[1].score rescue '...' %>] <%= User.find(match.scores[1].user_id).display_name rescue '...' %>
+          <%= Membership.find(match.scores[0].membership_id).user.display_name rescue "---"%> [<%= match.scores[0].score %>] -
+          [<%= match.scores[1].score rescue '...' %>] <%= Membership.find(match.scores[1].membership_id).user.display_name rescue '...' %>
         <% else %>
           No scores added
         <% end %>

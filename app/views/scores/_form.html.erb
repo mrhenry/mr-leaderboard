@@ -4,8 +4,9 @@
     <%= error_messages_for :score %>
   </div>
   <div>
-    <%= f.label 'User' %>
-    <%= f.select(:user_id, options_from_collection_for_select(@leaderboard.users, 'id', 'display_name')) %>
+    <%= f.label 'Player' %>
+    <%# f.select(:user_id, options_from_collection_for_select(@leaderboard.users, 'id', 'display_name')) %>
+    <%= f.select(:membership_id, @leaderboard.memberships.all.collect {|p| [ p.user.display_name, p.id ] }) %>
   </div>
   <div>
     <%= f.label 'Score'%>
