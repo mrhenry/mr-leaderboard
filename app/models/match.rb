@@ -3,7 +3,7 @@ class Match < ActiveRecord::Base
   default_scope :order => 'created_at DESC'
   
   has_one :leaderboard
-  has_many :scores
+  has_many :scores, :dependent => :destroy
   
   after_save :add_membership_statistics
   
