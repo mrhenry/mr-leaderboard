@@ -1,6 +1,5 @@
 MrLeaderboard::Application.routes.draw do
   
-
   resources :leaderboards do
     resources :users
     resources :matches do
