@@ -36,14 +36,14 @@ ActiveRecord::Schema.define(:version => 20110303192956) do
   end
 
   create_table "memberships", :force => true do |t|
-    t.integer  "leaderboard_id"
-    t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "won_games",      :default => 0
-    t.integer  "played_games",   :default => 0
-    t.integer  "won_matches",    :default => 0
-    t.integer  "played_matches", :default => 0
+    t.integer   "leaderboard_id"
+    t.integer   "user_id"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
+    t.integer   "won_games",      :default => 0
+    t.integer   "played_games",   :default => 0
+    t.integer   "won_matches",    :default => 0
+    t.integer   "played_matches", :default => 0
   end
 
   create_table "scores", :force => true do |t|

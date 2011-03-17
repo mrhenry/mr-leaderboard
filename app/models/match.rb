@@ -38,7 +38,7 @@ private
     membership = Membership.first(:conditions => ["leaderboard_id = ? and user_id = ?", leaderboard_id, score.user_id])
     
     score.membership_id = membership.id
-    if score.update_attributes(score)
+    if score.update_attributes!(score)
       Rails.logger.debug('---------------')
       Rails.logger.debug("saved")
       Rails.logger.debug('---------------')
@@ -46,6 +46,7 @@ private
       Rails.logger.debug('---------------')
       Rails.logger.debug(errors.inspect)
       Rails.logger.debug("not saved")
+      Rails.logger.debug(score.inspect)
       Rails.logger.debug('---------------')
     end
     

@@ -6,7 +6,7 @@ class Score < ActiveRecord::Base
   validate :all_different_users_per_match
   validates_presence_of :score
   
-  validate :only_2_scores_per_match if :before_create
+  #validate :only_2_scores_per_match if :before_create
   
   after_save :save_match
   
