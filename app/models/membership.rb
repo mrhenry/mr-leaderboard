@@ -14,11 +14,11 @@ class Membership < ActiveRecord::Base
   end
   
   def match_win_percentage
-    return (Float(self.won_matches) / Float(self.played_matches) * 100).round
+    return (Float(self.won_matches) / Float(self.played_matches) * 100).round(2)
   end
   
   def game_win_percentage
-    return (Float(self.won_games) / Float(self.played_games) * 100).round
+    return (Float(self.won_games) / Float(self.played_games) * 100).round(2)
   end
   
 end
