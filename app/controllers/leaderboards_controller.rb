@@ -8,6 +8,65 @@ class LeaderboardsController < ApplicationController
   
   def show
     @leaderboard = Leaderboard.find(params[:id])
+    
+    @results = []
+    
+    @nr_months = @leaderboard.matches.all.map { |match| [match.created_at.strftime('%Y-%m')] }
+    @nr_months.uniq!
+    @nr_months.each do |month|
+      
+      # get all matches for month
+      val = month[0]
+      @matches_for_month = @leaderboard.matches.find_all{|match| match.created_at.strftime('%Y-%m') == val}
+  
+      # look up royalties for month
+      @king = 0
+      @royalties = []
+      @matches_for_month.each do |match|
+        
+        @match_result = match.scores.all(:order => 'score DESC')
+        @prince = @match_result[0]
+        @royalties.push @prince.membership_id
+        
+      end
+      
+      # determine the king for the month
+      # do a hash count (php style array_count_values)
+      counting = {}
+      @royalties.each do |royal|
+          counting[royal] ||= 0
+          counting[royal] += 1
+      end
+      
+      # check for king
+      temp_val = 0
+      @royalties.each do |royal|
+          
+          if counting[royal] > temp_val
+            @king = royal
+          end
+          
+          temp_val = counting[royal]
+   
+      end
+      
+      # find user
+      @neo = User.find(@king)
+     
+      # write result
+      @result = {:month => month, :nr_matches => @matches_for_month.length, :king => @neo.display_name}
+  
+      # log
+      # Rails.logger.debug('---------------')
+      # Rails.logger.debug(val)
+      # Rails.logger.debug(@matches_for_month.length)
+      # Rails.logger.debug('---------------')
+      
+      # push to results
+      @results.push @result
+      
+    end
+    
     render :show
   end
   
