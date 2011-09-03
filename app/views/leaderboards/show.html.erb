@@ -87,7 +87,7 @@
 
 <ul>
 <% @results.each do |result| %>
-<li><%= result[:month] %>(#MATCHES <%= result[:nr_matches]%>) ☞ <%= result[:king] %></li>
+<li><%= result[:month] %>(#MATCHES <%= result[:nr_matches]%>) ☞ <%= result[:king] %>(#MATCHES <%= result[:king_matches]%>)</li>
 <% end %>
 </ul>
 

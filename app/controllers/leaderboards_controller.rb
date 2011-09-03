@@ -61,7 +61,7 @@ class LeaderboardsController < ApplicationController
       @neo = User.find(@king)
      
       # write result
-      @result = {:month => month, :nr_matches => @matches_for_month.length, :king => @neo.display_name}
+      @result = {:month => month, :nr_matches => @matches_for_month.length, :king => @neo.display_name, :king_matches => counting[@king]}
   
       # log
       # Rails.logger.debug('---------------')
