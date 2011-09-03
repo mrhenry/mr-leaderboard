@@ -24,10 +24,17 @@ class LeaderboardsController < ApplicationController
       @royalties = []
       @matches_for_month.each do |match|
         
-        @match_result = match.scores.all(:order => 'score DESC')
-        @prince = @match_result[0]
-        @royalties.push @prince.membership_id
+        # de 2 scores sorteren op score DESC -> hoogste vanboven
+        if match.scores.size > 1
+          
+          @match_result = match.scores.all(:order => 'score DESC')
+          # de winnaar is de eerste record
+          @prince = @match_result[0] 
+          # save membership
+          @royalties.push @prince.membership_id
         
+        end
+      
       end
       
       # determine the king for the month
