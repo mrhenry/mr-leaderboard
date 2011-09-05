@@ -58,7 +58,7 @@ class LeaderboardsController < ApplicationController
       end
       
       # find user
-      @neo = User.find(@king)
+      @neo = User.find(Membership.find(@king).user_id)
      
       # write result
       @result = {:month => month, :nr_matches => @matches_for_month.length, :king => @neo.display_name, :king_matches => counting[@king]}
