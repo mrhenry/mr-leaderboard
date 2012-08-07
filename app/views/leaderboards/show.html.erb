@@ -2,7 +2,49 @@
 
 <h2>Leaderboard users</h2>
 <% unless @leaderboard.memberships.empty? %>
-  
+
+  <h3>This month</h3>
+  <table cellpadding="5" border="1" style="border-collapse:collapse">
+    <thead>
+      <tr>
+        <th>User</th>
+        <th>Won matches</th>
+      </tr>
+    </thead>
+    <% @leaderboard.memberships.each do |membership| %>
+      <tr>
+        <td>
+          <%= image_tag gravatar(membership.user.email, 50) %><br>
+          <%= membership.user.display_name %>
+        </td>
+        <td><%= membership.won_matches_in_period(@leaderboard) %></td>
+      </tr>
+    <% end %>
+  </table>
+
+  <h3>Last month</h3>
+  <table cellpadding="5" border="1" style="border-collapse:collapse">
+    <thead>
+      <tr>
+        <th>User</th>
+        <th>Won matches</th>
+      </tr>
+    </thead>
+    <% @leaderboard.memberships.each do |membership| %>
+      <tr>
+        <td>
+          <%= image_tag gravatar(membership.user.email, 50) %><br>
+          <%= membership.user.display_name %>
+        </td>
+        <td><%= membership.won_matches_in_period(@leaderboard, Time.now.prev_month()) %></td>
+      </tr>
+    <% end %>
+  </table>
+
+  <br>
+  <br>
+
+  <h3>Overall</h3>
   <table cellpadding="5" border="1" style="border-collapse:collapse">
     <thead>
       <tr>
@@ -30,27 +72,27 @@
       </tr>
     <% end %>
   </table>
-  
+
   <% if (current_user and current_user.is_leaderboard_member?(@leaderboard)) or (current_user and current_user.is_admin?) %>
     <p><%= link_to "Add match", new_leaderboard_match_url(params[:id]) %></p>
   <% end %>
-  
+
   <% if current_user and current_user.is_admin? %>
     <p><%= link_to "Recalculate memberships", recalculate_memberships_url(@leaderboard.id) %> (Can take a while)</p>
   <% end %>
-  
+
 <% else %>
 
   <p>There are no user in this leaderboard.</p>
   <% if current_user and current_user.is_admin? %>
     <%= link_to "Add users to leaderboard", edit_leaderboard_url(params[:id]) %>
   <% end %>
-  
+
 <% end %>
 
 <h2>Latest 5 played matches</h2>
 <% unless @leaderboard.matches.empty? %>
-  
+
   <ul class="matches">
     <% @leaderboard.matches[0..4].each do |match| %>
       <li>
@@ -71,24 +113,15 @@
       </li>
     <% end %>
   </ul>
-  
+
   <% if current_user %>
     <p><%= link_to "View all matches", leaderboard_matches_url(params[:id]) %></p>
   <% end %>
-  
+
 <% else %>
 
   No matches added yet.
-  
+
 <% end %>
-
-
-<h2>Monthly overall Winner</h2>
-
-<ul>
-<% @results.each do |result| %>
-<li><%= result[:month] %>(#MATCHES <%= result[:nr_matches]%>) ☞ <%= result[:king] %>(#MATCHES <%= result[:king_matches]%>)</li>
-<% end %>
-</ul>
 
 <p><%= link_to "Back to leaderboard overview", leaderboards_url %></p>
