@@ -90,5 +90,5 @@ DEPENDENCIES
   authlogic!
   compass
   dynamic_form
-  rails (= 3.0.3)
+  rails
   sqlite3-ruby
