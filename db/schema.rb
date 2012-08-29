@@ -13,73 +13,62 @@
 ActiveRecord::Schema.define(:version => 20110303192956) do
 
   create_table "leaderboards", :force => true do |t|
-    t.string    "title"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "matches", :force => true do |t|
-    t.integer   "leaderboard_id"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
-  end
-
-  create_table "membership_to_memberships", :id => false, :force => true do |t|
-    t.integer  "membership_id"
-    t.integer  "opponent_id"
-    t.integer  "won_games",      :default => 0
-    t.integer  "played_games",   :default => 0
-    t.integer  "won_matches",    :default => 0
-    t.integer  "played_matches", :default => 0
+    t.integer  "leaderboard_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "memberships", :force => true do |t|
-    t.integer   "leaderboard_id"
-    t.integer   "user_id"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
-    t.integer   "won_games",      :default => 0
-    t.integer   "played_games",   :default => 0
-    t.integer   "won_matches",    :default => 0
-    t.integer   "played_matches", :default => 0
+    t.integer  "leaderboard_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "won_games",      :default => 0
+    t.integer  "played_games",   :default => 0
+    t.integer  "won_matches",    :default => 0
+    t.integer  "played_matches", :default => 0
   end
 
   create_table "scores", :force => true do |t|
-    t.integer   "user_id"
-    t.integer   "score"
-    t.integer   "match_id"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
-    t.integer   "membership_id"
+    t.integer  "user_id"
+    t.integer  "score"
+    t.integer  "match_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "membership_id"
   end
 
   create_table "user_sessions", :force => true do |t|
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", :force => true do |t|
-    t.string    "login"
-    t.string    "email"
-    t.string    "level"
-    t.string    "crypted_password"
-    t.string    "password_salt"
-    t.string    "persistence_token"
-    t.string    "single_access_token"
-    t.string    "perishable_token"
-    t.integer   "login_count"
-    t.integer   "failed_login_count"
-    t.timestamp "last_request_at"
-    t.timestamp "current_login_at"
-    t.timestamp "last_login_at"
-    t.string    "current_login_ip"
-    t.string    "last_login_ip"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
-    t.boolean   "active",              :default => false, :null => false
-    t.string    "display_name"
+    t.string   "login"
+    t.string   "email"
+    t.string   "level"
+    t.string   "crypted_password"
+    t.string   "password_salt"
+    t.string   "persistence_token"
+    t.string   "single_access_token"
+    t.string   "perishable_token"
+    t.integer  "login_count"
+    t.integer  "failed_login_count"
+    t.datetime "last_request_at"
+    t.datetime "current_login_at"
+    t.datetime "last_login_at"
+    t.string   "current_login_ip"
+    t.string   "last_login_ip"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "active",              :default => false, :null => false
+    t.string   "display_name"
   end
 
 end

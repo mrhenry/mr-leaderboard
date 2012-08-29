@@ -4,39 +4,45 @@
 <% unless @leaderboard.memberships.empty? %>
 
   <h3>This month</h3>
-  <table cellpadding="5" border="1" style="border-collapse:collapse">
+  <table class="table table-striped">
     <thead>
       <tr>
         <th>User</th>
         <th>Won matches</th>
+        <th>Played matches</th>
       </tr>
     </thead>
     <% @leaderboard.memberships.each do |membership| %>
+      <% next if membership.played_matches_in_period(@leaderboard) < 1 %>
       <tr>
         <td>
           <%= image_tag gravatar(membership.user.email, 50) %><br>
           <%= membership.user.display_name %>
         </td>
         <td><%= membership.won_matches_in_period(@leaderboard) %></td>
+        <td><%= membership.played_matches_in_period(@leaderboard) %></td>
       </tr>
     <% end %>
   </table>
 
   <h3>Last month</h3>
-  <table cellpadding="5" border="1" style="border-collapse:collapse">
+  <table class="table table-striped">
     <thead>
       <tr>
         <th>User</th>
         <th>Won matches</th>
+        <th>Played matches</th>
       </tr>
     </thead>
     <% @leaderboard.memberships.each do |membership| %>
+      <% next if membership.played_matches_in_period(@leaderboard, Time.now.prev_month()) < 1 %>
       <tr>
         <td>
           <%= image_tag gravatar(membership.user.email, 50) %><br>
           <%= membership.user.display_name %>
         </td>
         <td><%= membership.won_matches_in_period(@leaderboard, Time.now.prev_month()) %></td>
+        <td><%= membership.played_matches_in_period(@leaderboard, Time.now.prev_month()) %></td>
       </tr>
     <% end %>
   </table>

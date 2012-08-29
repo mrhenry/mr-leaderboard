@@ -30,4 +30,13 @@ class Membership < ActiveRecord::Base
     won_matches
   end
 
+  def played_matches_in_period(leaderboard, time = Time.now)
+    played_matches = 0
+    matches        = leaderboard.matches.select { |match| match.created_at <= time.end_of_month() and match.created_at >= time.beginning_of_month() }
+    matches.each do |match|
+      played_matches += 1 unless match.scores.select { |score| score.membership_id == self.id }.empty?
+    end
+    played_matches
+  end
+
 end

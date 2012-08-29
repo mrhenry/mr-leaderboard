@@ -1,34 +1,36 @@
-<h1>Leaderboards</h1>
+<div class="row"></div>
+  <h1>Leaderboards</h1>
 
-<table>
-<thead>
-  <tr>
-    <th>Title</th>
-    <th>Played matches</th>
-    <% if current_user and current_user.is_admin? %>
-      <th>Actions</th>
-    <% end %>
-  </tr>
-</thead>
-<tbody>
-<% unless @leaderboards.empty? %>
-  <% @leaderboards.each do |leaderboard| %>
+  <table class="table table-striped">
+  <thead>
     <tr>
-      <td><%= link_to leaderboard.title, leaderboard_url(leaderboard) %></td>
-      <td><%= leaderboard.matches.count %></td>
-      <% if current_user %>
-        <td class="actions">
-          <% if current_user and current_user.is_admin? %>
-            <%= link_to "Edit", edit_leaderboard_url(leaderboard) %>
-            <%= link_to "Destroy", leaderboard_url(leaderboard), :method => :delete, :confirm => "You sure?" %>
-          <% end %>
-        </td>
+      <th>Title</th>
+      <th>Played matches</th>
+      <% if current_user and current_user.is_admin? %>
+        <th>Actions</th>
       <% end %>
     </tr>
+  </thead>
+  <tbody>
+  <% unless @leaderboards.empty? %>
+    <% @leaderboards.each do |leaderboard| %>
+      <tr>
+        <td><%= link_to leaderboard.title, leaderboard_url(leaderboard) %></td>
+        <td><%= leaderboard.matches.count %></td>
+        <% if current_user %>
+          <td class="actions">
+            <% if current_user and current_user.is_admin? %>
+              <%= link_to "Edit", edit_leaderboard_url(leaderboard) %>
+              <%= link_to "Destroy", leaderboard_url(leaderboard), :method => :delete, :confirm => "You sure?" %>
+            <% end %>
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
   <% end %>
-<% end %>
-<tbody>
-</table>
-<% if current_user and current_user.is_admin? %>
-  <p><%= link_to "Add leaderboard", new_leaderboard_url %></p>
-<% end %>
+  <tbody>
+  </table>
+  <% if current_user and current_user.is_admin? %>
+    <p><%= link_to "Add leaderboard", new_leaderboard_url %></p>
+  <% end %>
+</div>
